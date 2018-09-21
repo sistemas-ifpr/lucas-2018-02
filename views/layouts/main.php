@@ -1,20 +1,17 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
-
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language='pt-br'?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,59 +21,92 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Sobre', 'url' => ['/site/about']],
-            ['label' => 'Contato', 'url' => ['/site/contact']],
-            ['label' => 'Livros', 'url' => ['/site/livros']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
+    <div class="wrap">
+        <?php
+        NavBar::begin([
+            'brandLabel' => Yii::$app->name,
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => [
+                'class' => 'navbar-inverse navbar-fixed-top',
+            ],
+        ]);
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-left'],
+            'items' => [
+                [
+                    'label' => 'Cadastros',
+                    'items' => [
+                       ['label' => 'Usuários', 'url' => ['/usuario/index']],
+                       '<li class="divider"></li>',
+                       ['label' => 'Titulos', 'url' => ['/titulos/index']],
+                       '<li class="divider"></li>',
+                       ['label' => 'Editoras', 'url' => ['/editoras/index']],
+                       '<li class="divider"></li>',
+                       ['label' => 'Funcionários', 'url' => ['/funcionarios/index']],
+                       '<li class="divider"></li>',
+                       ['label' => 'Alunos', 'url' => ['/aluno/index']],
+                   ],
+               ],
+           ],
+       ]);
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-left'],
+            'items' => [
+                [
+                    'label' => 'Reservas',
+                    'items' => [
+                       '<li class="divider"></li>',
+                       ['label' => 'Reservas', 'url' => ['/reservas/index']],
+                       ['label' => 'Editoras', 'url' => ['/editoras/index']],
+                       ['label' => 'Funcionários', 'url' => ['/funcionarios/index']],
+                       ['label' => 'Alunos', 'url' => ['/aluno/index']],
+                   ],
+               ],
+           ],
+       ]);
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => [
+                ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => 'Sobre', 'url' => ['/site/about']],
+                ['label' => 'Contato', 'url' => ['/site/contact']],
+                Yii::$app->user->isGuest ? (
+                    ['label' => 'Login', 'url' => ['/site/login']]
+                ) : (
+                    '<li>'
+                    . Html::beginForm(['/site/logout'], 'post')
+                    . Html::submitButton(
+                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'btn btn-link logout']
+                    )
+                    . Html::endForm()
+                    . '</li>'
                 )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
+            ],
+        ]);
+        NavBar::end();
+        ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
-</div>
+        <div class="container">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= Alert::widget() ?>
+                <?= $content ?>
+            </div>
+        </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; Biblioteca Online <?= date('Y') ?></p>
+        <footer class="footer">
+            <div class="container">
+                <p class="pull-left">&copy; Lucas Wesley</p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+                <p class="pull-right"><?= date('Y') ?></p>
+            </div>
+        </footer>
 
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
+        <?php $this->endBody() ?>
+    </body>
+    </html>
+    <?php $this->endPage() ?>

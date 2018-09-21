@@ -4,8 +4,9 @@ $this->title = 'Biblioteca Online';
 ?>
 <div class="site-index">
 
+
     <div class="jumbotron">
-        <h1>WELCOME</h1>
+        <h1>WE</h1>
 
         <p class="lead">Seja bem-vindo ao Biblioteca Online</p>
 
